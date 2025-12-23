@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+/* --- Geliştirici Bilgisi --- */
+/* Proje: Flutter Performans & Jank Web Sunumu */
+/* Amaç: Temiz, kurumsal ve mobil uyumlu bir arayüz oluşturmak. */
+/* Kullanılan Font: Poppins */
+/* --------------------------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Renk Değişkenleri - Projenin ana tema renklerini burada tanımladım */
+:root {
+    --flutter-blue: #739bc7; /* Ana Marka Rengi (Mavi) */
+    --flutter-light: #52C1F9;
+    --accent-red: #E03C3C; /* Hata mesajları ve "Bad" (Kötü) örnekler için */
+    --text-dark: #263238; /* Header ve Ana Başlıklar için Koyu Renk */
+    --text-gray: #546E7A;
+    --bg-light: #f7f9fc; /* Genel Açık Arka Plan rengi */
+    --card-bg: #FFFFFF;
+    --border-color: #ECEFF1;
+}
+
+body {
+    background: var(--bg-light);
+    color: var(--text-gray);
+    line-height: 1.6;
+}
+
+
+/* 2. HEADER ve NAVIGASYON - Site kimliğini ve navigasyon akışını sağlar */
+header {
+    background: var(--text-dark); /* Header'ı koyu arkaplanla belirginleştirdim */
+    color: var(--bg-light);
+    padding: 25px 0 15px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+nav {
+    background: var(--card-bg);
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky; /* Sayfada aşağı kayarken navigasyonun sabit kalmasını sağladım */
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-wrap: wrap; 
+}
+
+nav a {
+    display: block;
+    padding: 14px 18px;
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s ease;
+    border-bottom: 3px solid transparent;
+}
+
+nav a:hover {
+    color: var(--flutter-blue);
+    background: #f0f8ff;
+}
+
+nav a.aktif {
+    color: var(--flutter-blue);
+    border-bottom: 3px solid var(--flutter-blue); /* Aktif linkin altını çizdim */
+    background: #eef7ff;
+}
+
+nav li:last-child a, 
+nav li:nth-last-child(2) a {
+    margin-right: 0; 
+}
+
+nav span {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    font-size: 14px;
+    color: var(--text-dark); 
+    font-weight: 600;
+}
+
+
+/* 3. ANA İÇERİK ve KUTULAR - Sayfa içeriğinin ana yerleşimi */
+.container {
+    max-width: 1200px; /* İçeriği ortaladım ve maksimum genişlik verdim */
+    margin: 40px auto;
+    padding: 30px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Hafif gölge ekledim */
+    min-height: 70vh;
+}
+
+/* H2 BAŞLIK - Bölüm başlıklarını netleştirdim */
+h2 {
+    color: var(--text-dark); 
+    font-size: 30px; 
+    font-weight: 700;
+    margin-bottom: 25px;
+    border-left: 6px solid var(--flutter-blue); /* Mavi çizgi ile vurgu yaptım */
+    padding-left: 15px;
+    letter-spacing: -0.5px;
+}
+
+h3 {
+    color: var(--text-dark);
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.info-card h3 {
+    color: var(--text-dark);
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 8px;
+}
+
+p { margin-bottom: 15px; }
+ul { margin-left: 25px; margin-bottom: 15px; }
+li { margin-bottom: 5px; }
+
+
+/* KART ETKİLEŞİMİ - Kullanıcı etkileşimini artırmak için hover efekti ekledim */
+.info-card, .comparison-column, .screenshot-card {
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
+}
+
+.info-card:hover, .comparison-column:hover, .screenshot-card:hover {
+    transform: translateY(-8px); /* Hafif yukarı kayma efekti */
+    box-shadow: 0 16px 30px rgba(115, 155, 199, 0.4), 0 6px 10px rgba(0, 0, 0, 0.1); /* Vurgulu gölge */
+}
+
+
+/* HERO - Sayfanın tanıtım alanı */
+.hero {
+    background: var(--flutter-blue); 
+    color: #FFFFFF;
+    padding: 40px 30px;
+    border-radius: 8px;
+    border-left: none;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 25px rgba(2, 125, 253, 0.3); 
+}
+.hero h2 {
+    font-size: 36px;
+    color: #FFFFFF; 
+    margin-bottom: 10px;
+    padding-left: 0;
+    border-left: none;
+}
+.hero-sub {
+    font-size: 18px; 
+    color: #f0f0f0; 
+    font-weight: 300;
+}
+
+/* Genel Bilgi Kartları*/
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.info-card {
+    background: #fcfcfc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+/* Önem Kutusu */
+.importance-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fffae6; /* Yumuşak sarı arkaplan */
+    border: 1px solid #ffe8b3;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.importance-icon {
+    font-size: 40px;
+    color: var(--text-dark);
+    background: #fff0c4;
+    padding: 10px 15px;
+    border-radius: 10px;
+    line-height: 1;
+}
+
+
+
+/* 4. KOD, GÖRSEL ve KARŞILAŞTIRMA STİLLERİ */
+/* Kod blokları - Highlight.js ile uyumlu koyu tema */
+pre {
+    background: #272822; /* Koyu tema */
+    color: #f8f8f2;
+    border-left: 4px solid var(--flutter-light); /* Sol tarafa vurgu çizgisi */
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 14px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    margin-bottom: 20px;
+}
+
+/* Karşılaştırma Kutusu */
+.comparison-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    margin: 30px 0;
+    padding: 20px;
+    border-radius: 12px;
+    background: #eef7ff; /* Açık mavi arkaplan */
+    border: 1px solid #d4e7ff;
+}
+
+.comparison-column {
+    flex-basis: 48%; 
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    background: white;
+}
+
+.comparison-column.bad {
+    border-left: 5px solid #E03C3C; /* Kötü örnekler için kırmızı çizgi */
+}
+
+.comparison-column.good {
+    border-left: 5px solid #2e7d32; /* İyi örnekler için yeşil çizgi */
+}
+
+.comparison-column h4 {
+    margin-top: 0;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+.comparison-column ul {
+    margin-left: 0;
+    list-style: none;
+}
+.comparison-column li {
+    padding-left: 20px;
+    position: relative;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+.comparison-column.bad li::before {
+    content: "❌"; /* Kötü maddeler için emoji */
+    position: absolute;
+    left: 0;
+}
+.comparison-column.good li::before {
+    content: "✅"; /* İyi maddeler için emoji */
+    position: absolute;
+    left: 0;
+}
+
+
+/* Görseller Sayfası Kartları */
+.screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.screenshot-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Görsel kart başlıkları */
+.screenshot-card h3 {
+    color: var(--accent-red); 
+    font-size: 20px;
+}
+
+.screenshot-card:last-child h3 {
+    color: #2e7d32; 
+}
+
+.screenshot-desc, .screenshot-note {
+    font-size: 14px;
+    color: var(--text-gray);
+    margin-bottom: 10px;
+}
+
+.screenshot-note {
+    background: #f0f8ff;
+    padding: 10px;
+    border-radius: 8px;
+    border-left: 3px solid var(--flutter-blue);
+    font-size: 13px;
+}
+
+.screen-img {
+    width: 100%;
+    height: auto;
+    max-height: 400px; 
+    object-fit: contain; 
+    display: block;
+    margin: 15px auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* 5. GİRİŞ/KAYIT Formları ve Butonlar - Kullanıcı yönetimi arayüzü */
+form {
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: #fcfcfc;
+}
+
+label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--flutter-blue);
+    outline: none;
+}
+
+button[type="submit"] {
+    background: var(--flutter-blue);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+    font-weight: 600;
+}
+
+button[type="submit"]:hover {
+    background: #0069cc;
+}
+
+/* Mesajlar - Flash mesajları ve hata/başarı bildirimleri */
+.error-message {
+    color: var(--accent-red);
+    background: #ffebeb;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #f0adad;
+}
+
+.success-message {
+    color: #2e7d32;
+    background: #e6ffec;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #a3d9a3;
+}
+
+/* Flash Mesaj Stilleri */
+.flash-message {
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    border-left: 5px solid;
+}
+.flash-message.success {
+    background: #e9f5e9;
+    color: #2e7d32;
+    border-color: #2e7d32;
+}
+.flash-message.error {
+    background: #fbebeb;
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+}
+/* 7. FOOTER - Sayfa alt bilgisi */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    margin-top: 40px;
+    color: var(--text-gray);
+    background: #eef3f7;
+    border-top: 1px solid var(--border-color);
+}
+
+/* 8. MOBİL UYUMLULUK - Sayfanın küçük ekranlara uyumunu sağladım */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+    nav ul {
+        justify-content: center;
+    }
+    nav a {
+        padding: 10px 12px;
+    }
+    .hero h2 {
+        font-size: 28px;
+    }
+    .info-grid, .screenshot-grid, .comparison-box {
+        grid-template-columns: 1fr;
+        display: block; 
+    }
+    .comparison-column {
+        flex-basis: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+/* 9. AÇILIŞ SAYFASI (WELCOME) STİLLERİ - Yeni eklenen sayfanın özel stilini oluşturdum */
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh; /* Ekranın ortasında olmasını sağlar */
+    padding: 30px 0;
+}
+
+.welcome-card {
+    background: var(--card-bg);
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    max-width: 650px;
+    text-align: center;
+    border-top: 5px solid var(--flutter-blue); /* Mavi çizgi vurgusu */
+}
+
+.welcome-card h2 {
+    color: var(--text-dark);
+    font-size: 32px;
+    margin-bottom: 25px;
+    padding-left: 0;
+    border-left: none; 
+}
+
+.welcome-actions {
+    margin-top: 30px;
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 10px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-primary {
+    background: var(--flutter-blue); 
+    color: white;
+}
+.btn-primary:hover {
+    background: #507eac; 
+}
+
+.btn-secondary {
+    background: #EFEFEF; 
+    color: var(--text-dark);
+    border: 1px solid var(--border-color);
+}
+.btn-secondary:hover {
+    background: #D8D8D8;
+}
