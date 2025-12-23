@@ -102,3 +102,5 @@ Projenin başarıyla çalışması için bilgisayarınızda XAMPP (veya benzeri 
 - Parola Hashleme: https://www.php.net/manual/en/function.password-hash.php
 - Web Standartları ve Responsive: https://developer.mozilla.org/en-US/docs/Web
 - Highlight.js Kullanımı: https://highlightjs.org/usage/
+
+--**Sevdenur Aktürk**
